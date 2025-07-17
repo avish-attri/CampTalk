@@ -2,7 +2,6 @@ import './Home.css'
 import React, { useEffect, useState } from 'react'
 import Card from './Card'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   useEffect(() => {
