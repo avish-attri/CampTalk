@@ -10,8 +10,7 @@ const Home = () => {
   }, []);
 
   const [posts, setPosts] = useState();
-  const url = process.env.REACT_APP_SERVER_URL
-  const navigate = useNavigate();
+  const url = process.env.REACT_APP_SERVER_URL;
 
   const loadPosts = async () => {
     try {

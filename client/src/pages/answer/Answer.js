@@ -6,7 +6,7 @@ import './Answer.css';
 const Answer = () => {
   const { postID } = useParams();
   const [question, setQuestion] = useState('');
-  const [author, setAuthor] = useState('');
+  const [ setAuthor] = useState('');
   const [answer, setAnswer] = useState('');
   const [isOwnQuestion, setIsOwnQuestion] = useState(false);
   const url = process.env.REACT_APP_SERVER_URL;
