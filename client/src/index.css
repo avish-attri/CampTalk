@@ -1,0 +1,61 @@
+html, body {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to bottom, #fff 0%, #fff 90%, #f3f4f8 100%);
+  overflow-x: hidden;
+  color: #23272f;
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  letter-spacing: 0.01em;
+  transition: background 0.4s, color 0.2s;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background: #eaf6ff;
+}
+::-webkit-scrollbar-thumb {
+  background: #c6c7cd;
+  border-radius: 8px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #23272f;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+a {
+  color: #217dbb;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover {
+  color: #174e6e;
+  text-decoration: underline;
+}
+
+.page-wrapper {
+  min-height: 100vh;
+  padding-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

@@ -1,0 +1,20 @@
+.Home {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.7rem;
+  padding: 1rem 2rem;
+  min-height: 100vh;
+  background: linear-gradient(120deg, #f8fafc 0%, #eaf6ff 50%, #e0e7ff 100%, #f3e8ff 120%);
+}
+
+@media (max-width: 1200px) {
+  .Home {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .Home {
+    grid-template-columns: 1fr;
+  }
+}
