@@ -15,8 +15,7 @@ const allowedOrigins = [
   "https://camp-talk.vercel.app", // main production frontend
   "https://camp-talk-gfrw.vercel.app", // ✅ your current frontend domain (as per the error)
   "https://camp-talk-27fi-git-main-avishs-projects-3.vercel.app", // vercel preview
-  /\.vercel\.app$/, // optional catch-all
-  /\.netlify\.app$/
+  /\.vercel\.app$/
 ];
 
 // ✅ CORS middleware setup with debugging log
