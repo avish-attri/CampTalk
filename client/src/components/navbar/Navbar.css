@@ -110,11 +110,20 @@
     .navbar__links {
         flex-direction: column;
         width: 100%;
+        gap: 0.5em; 
+        margin-top: 1.2em;
+        margin-bottom: 1.2em; 
     }
 
     .navbar__link {
         margin-right: 0;
         margin-bottom: 0.5rem;
+        padding: 0.8em 1.8em 0.8em 2.2em;
+        border-radius: 6px;
+    }
+
+    .navbar__link:active, .navbar__link:focus {
+        background: #e3f0fb;
     }
 
     .navbar__search {

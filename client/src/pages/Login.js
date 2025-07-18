@@ -15,7 +15,7 @@ const Login = () => {
     try {
       const response = await axios.post(`${url}/user/login`, { username, password });
       if (response.data.success) {
-        localStorage.setItem('df_username', username); // Only store username for session
+        localStorage.setItem('df_username', username); 
         setError('');
         navigate('/');
       } else {

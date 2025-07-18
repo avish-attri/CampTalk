@@ -24,7 +24,7 @@ const SinglePost = () => {
 
     useEffect(() => {
         loadPosts();
-        // eslint-disable-next-line
+        
     }, [])
 
     const deletePost = async (e) => {

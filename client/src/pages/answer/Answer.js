@@ -6,7 +6,8 @@ import './Answer.css';
 const Answer = () => {
   const { postID } = useParams();
   const [question, setQuestion] = useState('');
-  const [ setAuthor] = useState('');
+  const [error, setError] = useState('');
+  const [author, setAuthor] = useState('');
   const [answer, setAnswer] = useState('');
   const [isOwnQuestion, setIsOwnQuestion] = useState(false);
   const url = process.env.REACT_APP_SERVER_URL;
@@ -18,15 +19,23 @@ const Answer = () => {
     const fetchQuestion = async () => {
       try {
         const response = await axios.get(`${url}/getsinglepost?postID=${postID}`);
-        setQuestion(response?.data?.responseData?.question || '');
-        setAuthor(response?.data?.responseData?.author || '');
-        setIsOwnQuestion(response?.data?.responseData?.author === username);
+        const responseData = response?.data?.responseData;
+        if (responseData && responseData.question && typeof responseData.question === 'string' && responseData.question.trim() !== '') {
+          setQuestion(responseData.question);
+          setError('');
+        } else {
+          setQuestion('');
+          setError('Question not found.');
+        }
+        setAuthor(responseData?.author || '');
+        setIsOwnQuestion(responseData?.author === username);
       } catch (error) {
-        setQuestion('Question not found.');
+        setQuestion('');
+        setError('Question not found.');
       }
     };
     fetchQuestion();
-    // eslint-disable-next-line
+
   }, [postID, username]);
 
   const submitAnswer = async (e) => {
@@ -48,7 +57,7 @@ const Answer = () => {
 
   return (
     <div className="answer-page">
-      <h2 className="answer-page__question">{question}</h2>
+      <h2 className="answer-page__question">{error ? error : question}</h2>
       {isOwnQuestion ? (
         <div className="answer-page__warning">You cannot answer your own question.</div>
       ) : (

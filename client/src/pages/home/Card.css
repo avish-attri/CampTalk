@@ -28,7 +28,7 @@
 @media (max-width: 700px) {
   .card {
     max-width: 95vw;
-    padding: 24px 8px;
+    padding: 20px 14px 20px 24px; /* Extra left padding for small screens */
     margin: 16px auto;
   }
 }

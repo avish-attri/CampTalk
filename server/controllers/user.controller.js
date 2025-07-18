@@ -7,14 +7,14 @@ const registerUser = async (req, res) => {
         if (!username || !password) {
             return res.status(400).json({ success: false, message: 'Username and password are required.' });
         }
-        // Check if user already exists
+
         const existingUser = await UserModel.findOne({ username });
         if (existingUser) {
             return res.status(409).json({ success: false, message: 'Username already exists. Please choose another.' });
         }
-        // Hash the password
+
         const hashedPassword = await bcrypt.hash(password, 10);
-        // Create new user
+
         const user = new UserModel({ username, password: hashedPassword });
         await user.save();
         res.status(201).json({ success: true, message: 'User registered successfully.' });

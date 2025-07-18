@@ -14,7 +14,7 @@ const Home = () => {
   const loadPosts = async () => {
     try {
       const response = await axios.get(`${url}/getposts`);
-      // Sort posts so newest is first (assuming _id is monotonic)
+      
       const sorted = (response.data.responseData || []).slice().reverse();
       setPosts(sorted);
     } catch (error) {
@@ -24,7 +24,7 @@ const Home = () => {
 
   useEffect(() => {
     loadPosts();
-    // eslint-disable-next-line
+
   }, [])
 
   return (

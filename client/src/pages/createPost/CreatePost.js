@@ -32,7 +32,6 @@ const CreatePost = () => {
     if (postID) {
       loadPosts();
     }
-    // eslint-disable-next-line
   }, [postID])
 
   const submitDetails = async (e) => {
@@ -56,7 +55,7 @@ const CreatePost = () => {
         });
         if (response?.data?.responseData) {
           setQuestion("");
-          navigate('/my-questions'); // Redirect to My Questions after update
+          navigate('/my-questions'); 
         }
       }
     } catch (error) {

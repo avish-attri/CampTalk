@@ -1,6 +1,6 @@
 body, .create-post-bg {
   min-height: 100vh;
-  background: linear-gradient(120deg, #f8fafc 0%, #eaf6ff 50%, #e0e7ff 100%, #f3e8ff 120%);
+  background: #fff;
 }
 
 .create-post {

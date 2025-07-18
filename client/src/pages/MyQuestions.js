@@ -12,7 +12,7 @@ const MyQuestions = () => {
   useEffect(() => {
     document.title = 'My Questions | CampTalk';
     fetchMyQuestions();
-    // eslint-disable-next-line
+
   }, [username]);
 
   const fetchMyQuestions = async () => {
@@ -30,7 +30,7 @@ const MyQuestions = () => {
       await axios.delete(`${url}/deletepost`, { data: { postID } });
       setMyQuestions(myQuestions.filter(q => q._id !== postID));
     } catch (error) {
-      // Optionally handle error silently
+
     }
   };
 
