@@ -11,20 +11,26 @@ const Login = () => {
   const url = process.env.REACT_APP_SERVER_URL;
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(`${url}/user/login`, { username, password });
-      if (response.data.success) {
-        localStorage.setItem('df_username', username); 
-        setError('');
-        navigate('/');
-      } else {
-        setError(response.data.message || 'Login failed');
-      }
-    } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
+  e.preventDefault();
+  try {
+    const response = await axios.post(
+      `${url}/api/v1/user/login`,
+      { username, password },
+      { withCredentials: true }
+    );
+
+    if (response.data.success) {
+      localStorage.setItem('df_username', username);
+      setError('');
+      navigate('/');
+    } else {
+      setError(response.data.message || 'Login failed');
     }
-  };
+  } catch (err) {
+    setError(err.response?.data?.message || 'Login failed');
+  }
+};
+
 
   return (
     <div className="login-page">
