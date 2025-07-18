@@ -34,4 +34,17 @@
 - Vercel for backend deployment
 - MongoDB Atlas for cloud database
 
+## 📸 Screenshots
+
+### 🏠 Home Page
+![Home Page](./Screenshots/Screenshot-1.png)
+
+### ❓ Question Feed
+![Question Feed](./Screenshots/Screenshot-2.png)
+
+### 📝 View My Questions
+![View My Questions](./Screenshots/Screenshot-3.png)
+
+### 💬 Login/Signup Page
+![Login/Signup Page](./Screenshots/Screenshot-4.png)
 
