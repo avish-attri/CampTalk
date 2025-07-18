@@ -10,7 +10,7 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://camptalk.vercel.app",
+  "https://camptalk.vercel.app", // Correct frontend URL (no dash)
   "https://camp-talk-27fi-git-main-avishs-projects-3.vercel.app", // Added Vercel preview URL
   /\.vercel\.app$/,
   /\.netlify\.app$/
