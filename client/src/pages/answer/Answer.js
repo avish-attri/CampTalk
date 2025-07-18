@@ -7,7 +7,6 @@ const Answer = () => {
   const { postID } = useParams();
   const [question, setQuestion] = useState('');
   const [error, setError] = useState('');
-  const [author, setAuthor] = useState('');
   const [answer, setAnswer] = useState('');
   const [isOwnQuestion, setIsOwnQuestion] = useState(false);
   const url = process.env.REACT_APP_SERVER_URL;
@@ -27,7 +26,6 @@ const Answer = () => {
           setQuestion('');
           setError('Question not found.');
         }
-        setAuthor(responseData?.author || '');
         setIsOwnQuestion(responseData?.author === username);
       } catch (error) {
         setQuestion('');

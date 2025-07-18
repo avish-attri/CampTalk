@@ -12,8 +12,8 @@ const MyQuestions = () => {
   useEffect(() => {
     document.title = 'My Questions | CampTalk';
     fetchMyQuestions();
-
-  }, [username]);
+    // eslint-disable-next-line
+  }, [username, fetchMyQuestions]);
 
   const fetchMyQuestions = async () => {
     try {

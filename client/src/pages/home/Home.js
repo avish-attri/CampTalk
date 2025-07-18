@@ -24,8 +24,8 @@ const Home = () => {
 
   useEffect(() => {
     loadPosts();
-
-  }, [])
+    // eslint-disable-next-line
+  }, [loadPosts])
 
   return (
     <div className='Home'>

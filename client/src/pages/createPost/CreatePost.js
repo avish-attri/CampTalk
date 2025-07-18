@@ -32,7 +32,8 @@ const CreatePost = () => {
     if (postID) {
       loadPosts();
     }
-  }, [postID])
+    // eslint-disable-next-line
+  }, [postID, loadPosts])
 
   const submitDetails = async (e) => {
     e.preventDefault();
