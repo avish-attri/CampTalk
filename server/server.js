@@ -9,9 +9,10 @@ import connectWithMongoDB from "./db/Connection1.js";
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:3000",       
-  /\.vercel\.app$/,               
-  /\.netlify\.app$/                
+  "http://localhost:3000",
+  "https://camptalk.vercel.app",
+  /\.vercel\.app$/,
+  /\.netlify\.app$/
 ];
 
 app.use(
