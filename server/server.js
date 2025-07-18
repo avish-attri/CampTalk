@@ -1,42 +1,52 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
-import express from 'express';
-import cors from 'cors';
-import PostRoute from './routes/post.route.js';
-import connectWithMongoDB from './db/Connection1.js';
+import express from "express";
+import cors from "cors";
+import PostRoute from "./routes/post.route.js";
+import connectWithMongoDB from "./db/Connection1.js";
 
 const app = express();
 
-// ✅ Dynamic CORS for multiple environments
 const allowedOrigins = [
-  'http://localhost:3000',
-  'https://fantastic-queijadas-9c1b31.netlify.app/'
-//   'https://fantastic-queijadas-9c1b31.netlify.app'
+  "http://localhost:3000",       
+  /\.vercel\.app$/,               
+  /\.netlify\.app$/                
 ];
 
-app.use(cors({
-  origin: allowedOrigins,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
-
-app.options('*', cors());
-
-connectWithMongoDB();
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (
+        allowedOrigins.some((o) =>
+          o instanceof RegExp ? o.test(origin) : o === origin
+        )
+      ) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/v1', PostRoute);
+connectWithMongoDB();
 
-app.get('/', (req, res) => {
+app.use("/api/v1", PostRoute);
+
+app.get("/", (req, res) => {
   res.send({
     activeStatus: true,
     error: false,
+    message: "Server is running successfully 🚀",
   });
 });
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-  console.log(`Server is listening on port http://localhost:${PORT}`);
+  console.log(`✅ Server is running on port: ${PORT}`);
 });
