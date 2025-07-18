@@ -11,10 +11,12 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://camp-talk.vercel.app",
-  "https://camp-talk-gfrw.vercel.app", 
-  "https://camp-talk-27fi-git-main-avishs-projects-3.vercel.app", 
-  /\.vercel\.app$/
+  "https://camptalk.vercel.app",
+  "https://camptalk.netlify.app", // Added Netlify frontend URL
+  "https://camp-talk-27fi-git-main-avishs-projects-3.vercel.app",
+  "https://camp-talk-gfrw.vercel.app",
+  /\.vercel\.app$/,
+  /\.netlify\.app$/
 ];
 
 
