@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
+
 import express from "express";
 import cors from "cors";
 import PostRoute from "./routes/post.route.js";
@@ -8,43 +9,50 @@ import connectWithMongoDB from "./db/Connection1.js";
 
 const app = express();
 
+// ✅ Explicit list of allowed frontend origins
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://camptalk.vercel.app", // Correct frontend URL (no dash)
-  "https://camp-talk-27fi-git-main-avishs-projects-3.vercel.app", // Added Vercel preview URL
-  /\.vercel\.app$/,
+  "https://camp-talk.vercel.app", // main production frontend
+  "https://camp-talk-gfrw.vercel.app", // ✅ your current frontend domain (as per the error)
+  "https://camp-talk-27fi-git-main-avishs-projects-3.vercel.app", // vercel preview
+  /\.vercel\.app$/, // optional catch-all
   /\.netlify\.app$/
 ];
 
+// ✅ CORS middleware setup with debugging log
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      if (
-        allowedOrigins.some((o) =>
-          o instanceof RegExp ? o.test(origin) : o === origin
-        )
-      ) {
+      console.log("Incoming Origin:", origin); // Optional: for debugging
+      if (!origin) return callback(null, true); // Allow non-browser tools
+      const isAllowed = allowedOrigins.some((o) =>
+        o instanceof RegExp ? o.test(origin) : o === origin
+      );
+      if (isAllowed) {
         callback(null, true);
       } else {
-        callback(new Error("Not allowed by CORS"));
+        callback(new Error("❌ Not allowed by CORS: " + origin));
       }
     },
     credentials: true,
   })
 );
 
-// Handle preflight requests for all routes
-app.options('*', cors());
+// ✅ Handle preflight requests globally
+app.options("*", cors());
 
+// ✅ Middleware for JSON parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ✅ MongoDB connection
 connectWithMongoDB();
 
+// ✅ API routes
 app.use("/api/v1", PostRoute);
 app.use("/api/v1/user", UserRoute);
 
+// ✅ Root route
 app.get("/", (req, res) => {
   res.send({
     activeStatus: true,
@@ -53,6 +61,7 @@ app.get("/", (req, res) => {
   });
 });
 
+// ✅ Start server
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`✅ Server is running on port: ${PORT}`);
