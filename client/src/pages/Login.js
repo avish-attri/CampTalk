@@ -1,23 +1,28 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
+import axios from 'axios';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const url = process.env.REACT_APP_SERVER_URL;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const users = JSON.parse(localStorage.getItem('df_users') || '{}');
-    if (users[username] && users[username] === password) {
-      localStorage.setItem('df_username', username);
-      localStorage.setItem('df_password', password);
-      setError('');
-      navigate('/');
-    } else {
-      setError('Invalid username or password');
+    try {
+      const response = await axios.post(`${url}/user/login`, { username, password });
+      if (response.data.success) {
+        localStorage.setItem('df_username', username); // Only store username for session
+        setError('');
+        navigate('/');
+      } else {
+        setError(response.data.message || 'Login failed');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || 'Login failed');
     }
   };
 

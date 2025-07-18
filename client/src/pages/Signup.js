@@ -1,24 +1,28 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
+import axios from 'axios';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const url = process.env.REACT_APP_SERVER_URL;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const users = JSON.parse(localStorage.getItem('df_users') || '{}');
-    if (users[username]) {
-      setError('Username already exists');
-      return;
+    try {
+      const response = await axios.post(`${url}/user/register`, { username, password });
+      if (response.data.success) {
+        setError('');
+        navigate('/login');
+      } else {
+        setError(response.data.message || 'Registration failed');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || 'Registration failed');
     }
-    users[username] = password;
-    localStorage.setItem('df_users', JSON.stringify(users));
-    setError('');
-    navigate('/login');
   };
 
   return (
