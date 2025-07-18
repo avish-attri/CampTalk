@@ -21,7 +21,7 @@ const MyQuestions = () => {
       }
     };
     fetchMyQuestions();
-  }, [username]);
+  }, [username, url]);
 
   const handleDelete = async (postID) => {
     try {
