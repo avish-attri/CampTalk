@@ -34,6 +34,9 @@ app.use(
   })
 );
 
+// Handle preflight requests for all routes
+app.options('*', cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
