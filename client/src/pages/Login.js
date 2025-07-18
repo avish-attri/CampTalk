@@ -14,9 +14,9 @@ const Login = () => {
   e.preventDefault();
   try {
     const response = await axios.post(
-      `${url}/api/v1/user/login`,
+      `${url}/user/login`,
       { username, password },
-      { withCredentials: true }
+      { withCredentials: true } // necessary for sending cookies/sessions if used
     );
 
     if (response.data.success) {
@@ -30,6 +30,7 @@ const Login = () => {
     setError(err.response?.data?.message || 'Login failed');
   }
 };
+
 
 
   return (
