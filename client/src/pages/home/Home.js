@@ -11,21 +11,19 @@ const Home = () => {
   const [posts, setPosts] = useState();
   const url = process.env.REACT_APP_SERVER_URL;
 
-  const loadPosts = async () => {
-    try {
-      const response = await axios.get(`${url}/getposts`);
-      
-      const sorted = (response.data.responseData || []).slice().reverse();
-      setPosts(sorted);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   useEffect(() => {
+    const loadPosts = async () => {
+      try {
+        const response = await axios.get(`${url}/getposts`);
+        // Sort posts so newest is first (assuming _id is monotonic)
+        const sorted = (response.data.responseData || []).slice().reverse();
+        setPosts(sorted);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     loadPosts();
-    // eslint-disable-next-line
-  }, [loadPosts])
+  }, [url]);
 
   return (
     <div className='Home'>

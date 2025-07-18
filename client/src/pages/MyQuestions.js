@@ -11,19 +11,17 @@ const MyQuestions = () => {
 
   useEffect(() => {
     document.title = 'My Questions | CampTalk';
+    const fetchMyQuestions = async () => {
+      try {
+        const response = await axios.get(`${url}/getposts`);
+        const all = response.data.responseData || [];
+        setMyQuestions(all.filter(q => q.author === username));
+      } catch (error) {
+        setMyQuestions([]);
+      }
+    };
     fetchMyQuestions();
-    // eslint-disable-next-line
-  }, [username, fetchMyQuestions]);
-
-  const fetchMyQuestions = async () => {
-    try {
-      const response = await axios.get(`${url}/getposts`);
-      const all = response.data.responseData || [];
-      setMyQuestions(all.filter(q => q.author === username));
-    } catch (error) {
-      setMyQuestions([]);
-    }
-  };
+  }, [username]);
 
   const handleDelete = async (postID) => {
     try {

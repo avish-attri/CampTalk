@@ -34,7 +34,7 @@ const Answer = () => {
     };
     fetchQuestion();
 
-  }, [postID, username]);
+  }, [postID, username, url]);
 
   const submitAnswer = async (e) => {
     e.preventDefault();

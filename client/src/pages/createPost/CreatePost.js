@@ -15,25 +15,23 @@ const CreatePost = () => {
   const url = process.env.REACT_APP_SERVER_URL;
   const username = localStorage.getItem('df_username');
 
-  const loadPosts = async () => {
-    try {
-      const response = await axios.get(`${url}/getsinglepost?postID=${postID}`);
-      const post = response?.data?.responseData;
-      if (post) {
-        setQuestion(post?.question);
-      }
-      console.log(post);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   useEffect(() => {
     if (postID) {
+      const loadPosts = async () => {
+        try {
+          const response = await axios.get(`${url}/getsinglepost?postID=${postID}`);
+          const post = response?.data?.responseData;
+          if (post) {
+            setQuestion(post?.question);
+          }
+          console.log(post);
+        } catch (error) {
+          console.error(error);
+        }
+      };
       loadPosts();
     }
-    // eslint-disable-next-line
-  }, [postID, loadPosts])
+  }, [postID, url]);
 
   const submitDetails = async (e) => {
     e.preventDefault();

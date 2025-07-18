@@ -13,19 +13,17 @@ const SinglePost = () => {
     const navigate = useNavigate();
     const url = process.env.REACT_APP_SERVER_URL
 
-    const loadPosts = async () => {
-        try {
-            const response = await axios.get(`${url}/getsinglepost?postID=${postID}`);
-            setPost(response?.data?.responseData);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
     useEffect(() => {
+        const loadPosts = async () => {
+            try {
+                const response = await axios.get(`${url}/getsinglepost?postID=${postID}`);
+                setPost(response?.data?.responseData);
+            } catch (error) {
+                console.error(error);
+            }
+        };
         loadPosts();
-        // eslint-disable-next-line
-    }, [loadPosts])
+    }, [postID, url]);
 
     const deletePost = async (e) => {
         e.preventDefault();
