@@ -6,7 +6,6 @@
 
 - 🔗 Frontend (Netlify): [https://camptalk.netlify.app/](https://camptalk.netlify.app/)
 - 🔗 Backend (Vercel): https://camp-talk-x5sz.vercel.app/
-
 ## ✨ Features
 
 - 🧑‍🎓 Post and edit questions
