@@ -9,21 +9,20 @@ import connectWithMongoDB from "./db/Connection1.js";
 
 const app = express();
 
-// ✅ Explicit list of allowed frontend origins
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://camp-talk.vercel.app", // main production frontend
-  "https://camp-talk-gfrw.vercel.app", // ✅ your current frontend domain (as per the error)
-  "https://camp-talk-27fi-git-main-avishs-projects-3.vercel.app", // vercel preview
+  "https://camp-talk.vercel.app",
+  "https://camp-talk-gfrw.vercel.app", 
+  "https://camp-talk-27fi-git-main-avishs-projects-3.vercel.app", 
   /\.vercel\.app$/
 ];
 
-// ✅ CORS middleware setup with debugging log
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      console.log("Incoming Origin:", origin); // Optional: for debugging
-      if (!origin) return callback(null, true); // Allow non-browser tools
+      console.log("Incoming Origin:", origin); 
+      if (!origin) return callback(null, true);
       const isAllowed = allowedOrigins.some((o) =>
         o instanceof RegExp ? o.test(origin) : o === origin
       );
@@ -37,21 +36,16 @@ app.use(
   })
 );
 
-// ✅ Handle preflight requests globally
 app.options("*", cors());
 
-// ✅ Middleware for JSON parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ MongoDB connection
 connectWithMongoDB();
 
-// ✅ API routes
 app.use("/api/v1", PostRoute);
 app.use("/api/v1/user", UserRoute);
 
-// ✅ Root route
 app.get("/", (req, res) => {
   res.send({
     activeStatus: true,
@@ -60,7 +54,6 @@ app.get("/", (req, res) => {
   });
 });
 
-// ✅ Start server
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`✅ Server is running on port: ${PORT}`);
